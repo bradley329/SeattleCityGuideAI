@@ -114,13 +114,22 @@ SOFTWARE.
 Linked dependencies not copied into this repository
 ========================================================================
 
-Flask 3.1.0
-Source: https://github.com/pallets/flask/tree/3.1.0
+FastAPI
+Source: https://github.com/fastapi/fastapi
+License: MIT
+Relationship: installed from the Python package index by requirements.txt
+
+Uvicorn
+Source: https://github.com/encode/uvicorn
 License: BSD-3-Clause
 Relationship: installed from the Python package index by requirements.txt
 
-Gunicorn
-Version: not pinned by requirements.txt
-Source: https://github.com/benoitc/gunicorn
-License: MIT
+Jinja2
+Source: https://github.com/pallets/jinja
+License: BSD-3-Clause
+Relationship: installed from the Python package index by requirements.txt
+
+python-multipart
+Source: https://github.com/Kludex/python-multipart
+License: Apache-2.0
 Relationship: installed from the Python package index by requirements.txt
