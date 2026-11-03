@@ -1,12 +1,12 @@
-# Azure App Service basic Python Flask sample
+# Azure App Service basic Python FastAPI sample
 
-This repository contains a minimal Python Flask web application for Azure App
+This repository contains a minimal Python FastAPI web application for Azure App
 Service. You can run it locally, deploy it with Azure Developer CLI, or use it
 as source for an App Service deployment workflow.
 
 ## What's included
 
-- `app.py` contains the Flask application.
+- `app.py` contains the FastAPI application, served by Uvicorn.
 - `requirements.txt` lists the Python packages installed during deployment.
 - `templates/` and `static/` contain the HTML templates and styles.
 - `infra/` contains Bicep modules for an App Service plan and Linux web app.
@@ -21,8 +21,8 @@ override the optional name parameters in `infra/main.bicep`.
 Install Python 3.12, then clone and start the app:
 
 ```shell
-git clone https://github.com/microsoft/app-service-basic-sample.git
-cd app-service-basic-sample
+git clone https://github.com/bradley329/SeattleCityGuideAI.git
+cd SeattleCityGuideAI
 python -m venv .venv
 ```
 
@@ -47,6 +47,17 @@ python app.py
 
 Open <http://127.0.0.1:5000>.
 
+For automatic reload during development, use
+`python -m uvicorn app:app --reload --port 5000` instead.
+Interactive API documentation is available at <http://127.0.0.1:5000/docs>.
+
+## Run tests
+
+```shell
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s tests
+```
+
 ## Deploy with Azure Developer CLI
 
 After you [install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd),
@@ -58,6 +69,10 @@ azd up
 ```
 
 `azd up` creates Azure resources in the subscription and location you select.
+The Bicep configuration sets the ASGI startup command to
+`python -m uvicorn app:app --host 0.0.0.0 --port 8000`.
+If deploying to an existing App Service without Bicep, set this command as the
+App Service startup command instead of relying on Flask/Gunicorn auto-detection.
 
 ## Source and third-party software
 
